@@ -1,0 +1,2 @@
+# pro_tmpl_stm32f10x
+可以在CLion中编译调试的stm32f10x模板工程
