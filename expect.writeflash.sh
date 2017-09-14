@@ -81,8 +81,9 @@ proc abortCatch {str} {
     global timeout
     exitSession 1
 }
+#TODO openocd进程多次启动导致expect send指令出错，只能任务管理器中kill openocd进程问题。
 proc abortWithTips {} {
-        abort "failed! please check the above, or:\n1.Power on your board;\n2.Rerun the tool OpenOCD\n3.Modify or comment this line in expect.writeflash.sh and rerun"
+        abort "failed! please CHECK THE ABOVE, or:\n1.Power on your board,or relink usb port;\n2.Close tool gdb, Rerun tool OpenOCD.or Ctrl+Shift+Esc,kill the openocd process.\n3.Modify or comment this line in expect.writeflash.sh and rerun\n"
 }
 #步骤1：登录建立与会话
 spawn telnet localhost 4444
@@ -103,7 +104,7 @@ send "reset init\n"
 #timeout {abortTimeout}  这句放前面会慢4s。。。
 #不能用^或\A匹配开头。。
 expect {
-   -nocase -re "\n(error|failed).*\n>" {
+   -nocase -re "\n(error|failed).*>" {
         abortWithTips
     }
     ">" {}
@@ -112,11 +113,11 @@ expect {
 #步骤3：烧录bin文件到板子
 send "flash write_image erase $bin_path 0x8000000\n"
 expect {
-        -re "\nwrote(.*)>" {
+        -nocase -re "\nwrote(.*)>" {
             #发出铛一声，提示烧写完成
             beepSucceed
         }
-        -re "\n(error|failed|couldn't open.*)>" {
+        -nocase  -re "\n(error|failed|couldn't open.*)>" {
             abortCatch $expect_out(1,string)
         }
         timeout {abortTimeout}

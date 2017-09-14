@@ -68,7 +68,7 @@ set(SOURCE_FILES ${C_FILES})
 
 set(CMAKE_EXE_LINKER_FLAGS
         "${CMAKE_EXE_LINKER_FLAGS} -L\"${PROJECT_SOURCE_DIR}/ldscripts\" -T libs.ld -T mem.ld -T sections.ld -fmessage-length=0 -fsigned-char -ffreestanding -nostartfiles -specs=nano.specs -Xlinker --gc-sections -Wl,-Map=${PROJECT_NAME}.map")
-
+#TODO 似乎直接Run的可以不生成elf吧。
 add_executable(${PROJECT_NAME}.elf ${SOURCE_FILES})
 set(HEX_FILE ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.bin)
@@ -76,3 +76,5 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
         )
+#TODO 找直接刷hex到串口的方法
+#TODO 1 OpenOCD关了重启与expect通信不上的原因。

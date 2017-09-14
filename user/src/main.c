@@ -59,19 +59,19 @@ main(int argc, char *argv[]) {
     delay_init();             //延时函数初始化
     LED_Init();            //初始化与LED连接的硬件接口
 
-    //TODO 试CLion调试时用trace_print 在console中有返回信息没
-trace_puts("hello stm32");
-for(int i=0;i<5;i++){
-    LED0 = 0;
-    LED1 = 0;
-    delay_ms(300);     //延时300ms
-    LED0 = 1;
-    LED1 = 1;
-    delay_ms(300);    //延时300ms
-}
+    //CLion调试时在OpenOCD窗口console中有返回信息:
+    trace_puts("hello stm32");
+    for (int i = 0; i < 5; i++) {
+        LED0 = 0;
+        LED1 = 0;
+        delay_ms(300);     //延时300ms
+        LED0 = 1;
+        LED1 = 1;
+        delay_ms(300);    //延时300ms
+    }
     while (1) {
         i = ++i % 6;
-        LED0 = 1;
+        LED0 = 0;
         LED1 = 1;
         delay_ms(300);     //延时300ms
         LED0 = 1;
