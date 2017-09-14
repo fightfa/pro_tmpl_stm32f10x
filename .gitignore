@@ -1,4 +1,3 @@
-.idea/
 
 # Prerequisites
 *.d
@@ -31,7 +30,7 @@
 *.dylib
 
 # Executables
-*.exe
+#*.exe
 *.out
 *.app
 *.i*86
@@ -53,3 +52,5 @@ Module.symvers
 Mkfile.old
 dkms.conf
 cmake-build-debug/
+#.idea/
+cmake-build-release/

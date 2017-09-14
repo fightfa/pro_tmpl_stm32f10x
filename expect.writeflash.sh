@@ -8,6 +8,8 @@
 #CLion中Run/Debug的romote debug和romote run互相切换时不能先自动关闭gbd窗口中原已运行的Tab，要手动关闭！# TODO 解决左边说的。
 #Run/debug Configuraton 中remote debug中必须手动指定Symbol file即elf文件路径，emote run中则Symbol file置空。
 #窗口输出文字都用了英文写。
+#可能须根据openocd版本变化而更新部分expect "xxxx"
+
 set now [clock clicks]
 set timeout 8
 #TODO * 传入elf路径参数给CLion中的gdb remote 再使CLion开gdb窗口。（难实现。）
